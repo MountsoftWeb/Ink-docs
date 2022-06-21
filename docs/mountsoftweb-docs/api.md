@@ -1,6 +1,10 @@
 ---
 title: api
 date: 2020-05-29
+tags:
+  - tag1
+categories:
+  - category1
 ---
 
 # test api
