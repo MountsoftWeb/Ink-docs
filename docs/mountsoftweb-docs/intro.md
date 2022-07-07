@@ -17,8 +17,8 @@ categories:
 
 ## 项目模块
 
-- ink-server 后台管理
-- ink-web 后台页面
-- ink-mini-app 小程序模块
-- ink-go-server go 语言服务支持
-- ink-docs 项目文档仓库
+- Ink-server 后台管理
+- Ink-web 后台页面
+- Ink-mini-app 小程序模块
+- Ink-go-server go 语言服务支持
+- Ink-docs 项目文档仓库
