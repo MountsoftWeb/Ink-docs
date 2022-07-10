@@ -1,7 +1,7 @@
 {
   "name": "Ink-docs",
   "version": "1.0.0",
-  "author": "reco_luan",
+  "author": "kite",
   "scripts": {
     "dev": "vuepress dev . --open --host \"localhost\"",
     "build": "vuepress build ."
