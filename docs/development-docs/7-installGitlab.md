@@ -142,3 +142,7 @@ docker exec -it gitlab-dev grep ‘Password:’ /etc/gitlab/initial_root_passwor
 ### 数据迁移
 
 目前服务器配置低，后续服务增加，配置跟不上，就需要进行数据迁移，需要具备这个技能，不可被动。
+
+代码仓库地址: [MountsoftWeb](https://github.com/mountsoftweb/)
+
+欢迎大家点击查看，觉着有用的话帮忙点个 star ，一起进步，成长！
