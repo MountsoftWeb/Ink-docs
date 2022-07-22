@@ -121,8 +121,11 @@ mkdir -p /nginx/log
 mkdir -p /nginx/html
 
 
-# 生成容器
+# 生成容器，先进入 nginx ,检查是否启动
 docker run --name nginx -p 9001:80 -d nginx:1.21.6
+# 将配置文件挂载到 宿主机
+docker cp -a mynginx:/etc/nginx/ /usr/local/nginx/conf
+
 # 将容器nginx.conf文件复制到宿主机
 docker cp nginx:/etc/nginx/nginx.conf /home/nginx/conf/nginx.conf
 # 将容器conf.d文件夹下内容复制到宿主机
