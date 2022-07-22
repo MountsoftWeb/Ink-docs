@@ -128,7 +128,7 @@ gitlab-rails console -e production
 
 # 查询id为1的用户，id为1的用户是超级管理员
 user = User.where(id:1).first
-# 修改密码为123456
+# 修改密码为 123456
 user.password='123456'
 # 保存
 user.save!
