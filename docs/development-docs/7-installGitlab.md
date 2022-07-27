@@ -87,16 +87,16 @@ mkdir -p /gitlab/var/opt
 
 docker run
 -d
--p 8443:443
--p 8090:80
--p 8022:22
+-p 8943:443
+-p 8990:80
+-p 8922:22
 --restart always
 --name gitlab
--v /usr/local/gitlab/etc:/etc/gitlab
--v /usr/local/gitlab/log:/var/log/gitlab
--v /usr/local/gitlab/data:/var/opt/gitlab
+-v /da1/apps/gitlab/etc:/etc/gitlab
+-v /da1/apps/gitlab/log:/var/log/gitlab
+-v /da1/apps/gitlab/data:/var/opt/gitlab
 --privileged=true
-gitlab-ce-zh
+gitlab-ce
 
 --privileged=true         #让容器获取宿主机root权限
 
@@ -142,6 +142,8 @@ docker exec -it gitlab-dev grep ‘Password:’ /etc/gitlab/initial_root_passwor
 ### 数据迁移
 
 目前服务器配置低，后续服务增加，配置跟不上，就需要进行数据迁移，需要具备这个技能，不可被动。
+
+需要保证服务器 gitlab 版本与目的服务器一致。
 
 代码仓库地址: [MountsoftWeb](https://github.com/mountsoftweb/)
 
