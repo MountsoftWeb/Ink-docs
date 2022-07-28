@@ -137,13 +137,73 @@ exit;
 
 docker exec -it gitlab-dev grep ‘Password:’ /etc/gitlab/initial_root_password
 
+# 初始化用户密码
+gitlab-rake "gitlab:password:reset[root]"
 ```
 
 ### 数据迁移
 
 目前服务器配置低，后续服务增加，配置跟不上，就需要进行数据迁移，需要具备这个技能，不可被动。
 
-需要保证服务器 gitlab 版本与目的服务器一致。
+需要保证服务器 gitlab 版本与目的服务器一致。在源服务器执行以下命令。
+
+```
+#执行如下命令开始备份
+
+gitlab-rake gitlab:backup:create
+
+# 备份文件在，备份文件从gitlab.rb中查找
+
+ll /var/opt/gitlab/backups
+
+1659017650_2022_07_28_15.2.0_gitlab_backup.tar
+```
+
+通过 scp 命令传输到目的服务器。
+
+```
+#停止相关数据连接服务，如果是新环境，其实不必要重启
+
+gitlab-ctl stop
+
+#修改权限，如果是从本服务器恢复可以不修改
+
+chmod 777 data/gitlab/backup/1659017650_2022_07_28_15.2.0_gitlab_backup.tar
+
+#从1659017650_2022_07_28_15.2.0编号备份中恢复
+
+sudo gitlab-rake gitlab:backup:restore BACKUP=1659017650_2022_07_28_15.2.0
+
+#按照提示输入两次yes并回车 # 启动
+
+sudo gitlab-ctl start
+```
+
+#### 数据定时备份
+
+通过上述操作步骤，就可以完成 gitlab 数据迁移，这样之后服务器变更，也能恢复数据。做数据迁移，不单单是在服务器迁移在使用该方法，在日常开发中要有数据忧患意识。即使不迁移数据，我们也要做好数据备份操作。
+
+```
+# 系统定时备份任务
+
+crontab -e # 每天2点定时备份
+
+0 3 * * * gitlab-rake gitlab:backup:create
+
+# 重启crontab
+
+systemctl restart crond
+
+# 定时清理备份 # gitLab已经支持，配置gitlab来实现自动清理功能
+
+vim etc/gitlab/gitlab.rb
+
+# 将backup_keep_time的配置取消注释，根据需要设置自动清理多少天前的备份，设置备份保留7天（7*3600*24=604800） gitlab_rails['backup_keep_time'] = 604800
+
+#重新加载gitlab的配置文件
+
+gitlab-ctl reconfigure
+```
 
 代码仓库地址: [MountsoftWeb](https://github.com/mountsoftweb/)
 

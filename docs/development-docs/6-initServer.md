@@ -134,7 +134,7 @@ docker cp nginx:/etc/nginx/conf.d /home/nginx/conf/conf.d
 docker cp nginx:/usr/share/nginx/html /home/nginx/
 
 docker run \
--p 9002:80 \
+-p 80:80 \
 --name nginx \
 -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \
 -v /home/nginx/conf/conf.d:/etc/nginx/conf.d \
