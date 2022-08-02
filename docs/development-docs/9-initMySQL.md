@@ -22,7 +22,7 @@ categories:
 
 #### MySQL 8 配置
 
-但是在 MySQL 8 版本之后，远程连接方式有所改变，需要单独配置。登录服务器地址，进入 docker MySQL 运行环境。
+但是在 MySQL 8 版本之后， 远程连接方式有所改变，需要单独配置。登录服务器地址，进入 docker MySQL 运行环境。
 
 ```
 mysql -u root -p
